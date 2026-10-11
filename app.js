@@ -17,7 +17,6 @@ const loadTasks = () => {
         const data = fs.readFileSync(tasksFilePath, 'utf8');
         const jsonData = JSON.parse(data);
         tasks = jsonData.tasks || [];
-        // Set nextId to be one more than the highest existing ID
         if (tasks.length > 0) {
             nextId = Math.max(...tasks.map(t => t.id)) + 1;
         }
@@ -71,7 +70,6 @@ app.get('/tasks/:id', (req, res) => {
     res.status(200).json(task);
 });
 
-// POST /tasks - Create a new task
 // POST /tasks - Create a new task
 app.post('/tasks', (req, res) => {
     const { title, description, completed } = req.body;
